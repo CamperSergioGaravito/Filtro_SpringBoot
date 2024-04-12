@@ -3,12 +3,14 @@ package com.filtro.inmuebles.components.converters;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import com.filtro.inmuebles.repository.entities.Casa;
 import com.filtro.inmuebles.repository.entities.Local;
 import com.filtro.inmuebles.repository.entities.Propietario;
 import com.filtro.inmuebles.repository.entities.Villa;
 import com.filtro.inmuebles.repository.entities.Zona;
 import com.filtro.inmuebles.repository.enums.TipoPiso;
 import com.filtro.inmuebles.repository.enums.TipoServicio;
+import com.filtro.inmuebles.repository.model.dto.CasaDTO;
 import com.filtro.inmuebles.repository.model.dto.LocalDTO;
 import com.filtro.inmuebles.repository.model.dto.VillaDTO;
 import com.filtro.inmuebles.repository.model.dto.crear.InmuebleDTOcrear;
@@ -61,6 +63,27 @@ public class InmueblesConvert {
         VillaDTO villa = model.map(local, VillaDTO.class);
 
         return villa;
+    }
+
+    public Casa crearCasaToCasa(InmuebleDTOcrear inmuebleDTOcrear, Propietario propietario, Zona zona) {
+        Casa casa = model.map(inmuebleDTOcrear, Casa.class);
+
+        casa.setTipoPiso(TipoPiso.valueOf(
+                inmuebleDTOcrear.getTipoPiso().toUpperCase()));
+        casa.setTipoServicio(TipoServicio.valueOf(
+                inmuebleDTOcrear.getTipoServicio().toUpperCase()));
+        casa.setPropietario(propietario);
+        casa.setZona(zona);
+
+        casa.setReferencia();
+
+        return casa;
+    }
+
+    public CasaDTO entityToCasaDto(Casa casa) {
+        CasaDTO casaDTO = model.map(casa, CasaDTO.class);
+
+        return casaDTO;
     }
 
 }

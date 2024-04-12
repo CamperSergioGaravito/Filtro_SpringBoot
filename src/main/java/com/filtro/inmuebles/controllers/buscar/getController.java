@@ -3,6 +3,7 @@ package com.filtro.inmuebles.controllers.buscar;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.filtro.inmuebles.repository.entities.Casa;
+import com.filtro.inmuebles.repository.model.dto.CasaDTO;
 import com.filtro.inmuebles.repository.model.dto.LocalDTO;
 import com.filtro.inmuebles.repository.model.dto.VillaDTO;
 import com.filtro.inmuebles.services.inmueble.InmuebleServices;
@@ -50,7 +51,7 @@ public class getController {
                     break;
 
                 case "NUEVO", "OCASION", "CASA":
-                    Casa casa = inmuebleServices.buscarCasaPisoOcasion(referencia);
+                    CasaDTO casa = inmuebleServices.buscarCasaPisoOcasion(referencia);
                     response.put("Mensaje", "El inmueble (" + tipoPiso + ") fue encontrado con éxito.");
                     response.put("inmueble", casa);
                     break;

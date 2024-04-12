@@ -12,8 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.filtro.inmuebles.repository.entities.Casa;
 import com.filtro.inmuebles.repository.enums.TipoPiso;
+import com.filtro.inmuebles.repository.model.dto.CasaDTO;
 import com.filtro.inmuebles.repository.model.dto.LocalDTO;
 import com.filtro.inmuebles.repository.model.dto.VillaDTO;
 import com.filtro.inmuebles.repository.model.dto.crear.InmuebleDTOcrear;
@@ -71,7 +71,7 @@ public class CrearController {
                         break;
     
                     case "NUEVO", "OCASION", "CASA":
-                        Casa casa = inmuebleServices.crearCasaPisoOcasion(inmuebleDTOcrear);
+                        CasaDTO casa = inmuebleServices.crearCasaPisoOcasion(inmuebleDTOcrear);
                         response.put("Mensaje", "El inmueble (" + tipoPiso + ") fue creado con éxito.");
                         response.put("inmueble", casa);
                         break;
