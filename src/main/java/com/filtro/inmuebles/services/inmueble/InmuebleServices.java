@@ -12,5 +12,11 @@ public interface InmuebleServices {
     VillaDTO crearVilla(InmuebleDTOcrear inmuebleDTOcrear);
 
     Casa crearCasaPisoOcasion(InmuebleDTOcrear inmuebleDTOcrear);
+
+    LocalDTO buscarLocal(int referencia);
+
+    VillaDTO buscarVilla(int referencia);
+
+    Casa buscarCasaPisoOcasion(int referencia);
     
 }

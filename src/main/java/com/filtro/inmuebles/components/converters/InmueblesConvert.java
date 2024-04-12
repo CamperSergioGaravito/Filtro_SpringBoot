@@ -5,10 +5,12 @@ import org.springframework.stereotype.Component;
 
 import com.filtro.inmuebles.repository.entities.Local;
 import com.filtro.inmuebles.repository.entities.Propietario;
+import com.filtro.inmuebles.repository.entities.Villa;
 import com.filtro.inmuebles.repository.entities.Zona;
 import com.filtro.inmuebles.repository.enums.TipoPiso;
 import com.filtro.inmuebles.repository.enums.TipoServicio;
 import com.filtro.inmuebles.repository.model.dto.LocalDTO;
+import com.filtro.inmuebles.repository.model.dto.VillaDTO;
 import com.filtro.inmuebles.repository.model.dto.crear.InmuebleDTOcrear;
 
 import lombok.AllArgsConstructor;
@@ -29,13 +31,36 @@ public class InmueblesConvert {
         local.setPropietario(propietario);
         local.setZona(zona);
 
+        local.setReferencia();
+
         return local;
+    }
+
+    public Villa crearVillaToVilla(InmuebleDTOcrear inmuebleDTOcrear, Propietario propietario){
+        Villa villa = model.map(inmuebleDTOcrear, Villa.class);
+        
+        villa.setSizeParcela(
+            inmuebleDTOcrear.getSizeParcela()
+        );
+
+        villa.setPropietario(propietario);
+
+        villa.setReferencia();
+
+        return villa;
+
     }
 
     public LocalDTO entityToLocalDto(Local local) {
         LocalDTO localDTO = model.map(local, LocalDTO.class);
 
         return localDTO;
+    }
+
+    public VillaDTO entityToVillaDto(Villa local) {
+        VillaDTO villa = model.map(local, VillaDTO.class);
+
+        return villa;
     }
 
 }

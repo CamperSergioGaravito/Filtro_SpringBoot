@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 
 import com.filtro.inmuebles.components.converters.InmueblesConvert;
 import com.filtro.inmuebles.repository.LocalRepository;
+import com.filtro.inmuebles.repository.VillaRepository;
 import com.filtro.inmuebles.repository.entities.Casa;
-import com.filtro.inmuebles.repository.entities.Local;
 import com.filtro.inmuebles.repository.entities.Propietario;
 import com.filtro.inmuebles.repository.entities.Zona;
 import com.filtro.inmuebles.repository.enums.TipoPiso;
@@ -28,6 +28,7 @@ public class InmuebleServiceImp implements InmuebleServices {
 
     private final LocalRepository localRepository;
     private final InmueblesConvert inmueblesConvert;
+    private final VillaRepository villaRepository;
     // Privados
     private final PropietarioServiceImpPriv propietarioServiceImpPriv;
     private final ZonaServicePriv zonaServicePriv;
@@ -68,8 +69,25 @@ public class InmuebleServiceImp implements InmuebleServices {
     @Transactional
     @Override
     public VillaDTO crearVilla(InmuebleDTOcrear inmuebleDTOcrear) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'crearVilla'");
+        String tipoServicio = inmuebleDTOcrear.getTipoServicio().toUpperCase();
+        
+        if(TipoPiso.exists(inmuebleDTOcrear.getTipoPiso().toUpperCase())) {
+            if (TipoServicio.exists(tipoServicio)) {
+                Propietario propietario = propietarioServiceImpPriv.findByCedula(
+                        inmuebleDTOcrear.getPropietario());
+    
+                    return inmueblesConvert.entityToVillaDto(
+                        villaRepository.save(
+                                inmueblesConvert.crearVillaToVilla(inmuebleDTOcrear, propietario)));
+    
+            } else {
+                throw new ManagerAccessExcep("Tipo de servicio",
+                        new Throwable(" El servicio de " + inmuebleDTOcrear.getTipoServicio() + " no existe."));
+            }
+        }
+        else {
+            throw new ManagerAccessExcep("Tipo piso", new Throwable(" " + inmuebleDTOcrear.getTipoPiso() + " no existe"));
+        }
     }
 
     @Transactional
@@ -77,6 +95,22 @@ public class InmuebleServiceImp implements InmuebleServices {
     public Casa crearCasaPisoOcasion(InmuebleDTOcrear inmuebleDTOcrear) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'crearCasaPisoOcasion'");
+    }
+
+    @Override
+    public LocalDTO buscarLocal(int referencia) {
+        return inmueblesConvert.entityToLocalDto(localRepository.findByReferencia(referencia).orElse(null));
+    }
+
+    @Override
+    public VillaDTO buscarVilla(int referencia) {
+        return inmueblesConvert.entityToVillaDto(villaRepository.findByReferencia(referencia).orElse(null));
+    }
+
+    @Override
+    public Casa buscarCasaPisoOcasion(int referencia) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'buscarCasaPisoOcasion'");
     }
 
 }

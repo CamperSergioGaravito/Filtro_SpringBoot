@@ -4,27 +4,25 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
 @DiscriminatorValue("Casa")
-public class Casa extends Estancia {
+public class Casa extends Inmueble {
     
     @ManyToOne
     @JoinColumn(
         name = "zona_id"
     )
     private Zona zona;
-
-    public Casa(int habitaciones, int banios, int aseos, int cocinas, boolean gasNatural, boolean luz,
-            boolean puertaBlindada, boolean parqueadero, Zona zona) {
-        super(habitaciones, banios, aseos, cocinas, gasNatural, luz, puertaBlindada, parqueadero);
-        this.zona = zona;
-    }
 
     
 

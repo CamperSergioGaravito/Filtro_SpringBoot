@@ -60,22 +60,6 @@ public abstract class Inmueble {
         this.referencia = this.hashCode();
     }
 
-    
-
-    public Inmueble(long referencia, Propietario propietario, String direccion, TipoPiso tipoPiso, double valor,
-            double superficie, TipoServicio tipoServicio) {
-                super();
-        this.referencia = referencia;
-        this.propietario = propietario;
-        this.direccion = direccion;
-        this.tipoPiso = tipoPiso;
-        this.valor = valor;
-        this.superficie = superficie;
-        this.tipoServicio = tipoServicio;
-    }
-
-
-
     @Override
     public int hashCode() {
         final int prime = 31;

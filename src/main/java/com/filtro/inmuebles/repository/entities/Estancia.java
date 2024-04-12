@@ -1,16 +1,15 @@
 package com.filtro.inmuebles.repository.entities;
 
-import com.filtro.inmuebles.repository.enums.TipoPiso;
-import com.filtro.inmuebles.repository.enums.TipoServicio;
-
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 
 @MappedSuperclass
 public abstract class Estancia extends Inmueble {
@@ -31,20 +30,6 @@ public abstract class Estancia extends Inmueble {
 
     private boolean parqueadero;
 
-    public Estancia(long referencia, Propietario propietario, String direccion, TipoPiso tipoPiso, double valor,
-            double superficie, TipoServicio tipoServicio, int habitaciones, int banios, int aseos, int cocinas,
-            boolean gasNatural, boolean luz, boolean puertaBlindada, boolean parqueadero) {
-        super(referencia, propietario, direccion, tipoPiso, valor, superficie, tipoServicio);
-        this.habitaciones = habitaciones;
-        this.banios = banios;
-        this.aseos = aseos;
-        this.cocinas = cocinas;
-        this.gasNatural = gasNatural;
-        this.luz = luz;
-        this.puertaBlindada = puertaBlindada;
-        this.parqueadero = parqueadero;
-    }
-
-    
+   
     
 }

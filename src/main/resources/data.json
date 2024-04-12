@@ -1,0 +1,23 @@
+{
+    "Crear inmueble": {
+        "propietario": 4567890123,
+        "direccion": "Calle 1 cra 2",
+        "tipoPiso": "Local",
+        "valor": 12000,
+        "superficie": 200,
+        "tipoServicio": "Alquiler",
+        "cantidadPuertasEntrada": 1,
+        "diafino": true,
+        "acondicionado": false,
+        "zona": 125465463,
+        "sizeParcela": 50,
+        "habitaciones": 2,
+        "banios": 1,
+        "aseos": 1,
+        "cocinas": 1,
+        "gasNatural": true,
+        "luz": true,
+        "puertaBlindada": false,
+        "parqueadero": false
+    }
+}
